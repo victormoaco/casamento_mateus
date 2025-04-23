@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contagem Regressiva</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0e0e0e;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    #timer {
+      display: flex;
+      gap: 20px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    .unit {
+      text-align: center;
+    }
+
+    .label {
+      font-size: 0.6em;
+      font-weight: normal;
+      color: #ccc;
+    }
+
+    .final-message {
+      font-size: 2em;
+      margin-top: 20px;
+      color: #00ff88;
+    }
+  </style>
+</head>
+<body>
+  <h1>Contagem Regressiva para o casamento do Mateus, CORRE MATEUS!!!!</h1>
+  <div id="timer">
+    <div class="unit"><span id="days">0</span><div class="label">Dias</div></div>
+    <div class="unit"><span id="hours">0</span><div class="label">Horas</div></div>
+    <div class="unit"><span id="minutes">0</span><div class="label">Minutos</div></div>
+    <div class="unit"><span id="seconds">0</span><div class="label">Segundos</div></div>
+  </div>
+  <div id="finalMessage" class="final-message" style="display:none;">
+    A contagem terminou! 🎉
+  </div>
+
+  <script>
+    const endDate = new Date("2026-05-17T00:00:00");
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = endDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("timer").style.display = "none";
+        document.getElementById("finalMessage").style.display = "block";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    const interval = setInterval(updateTimer, 1000);
+    updateTimer(); // Chama ao carregar a página
+  </script>
+</body>
+</html>
